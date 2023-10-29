@@ -1,0 +1,112 @@
+html, body {
+    font-family: "Century Gothic";
+    font-size: 16px;
+    background-color: #F8F8FF;
+  }
+
+h1 {
+  padding: 20px;
+  font-size: 20px;
+}
+
+h2 {
+  padding: 8px;
+  font-size: 14px;
+}
+
+th,td {
+  border: solid 1px;
+  padding: 6px;
+  text-align: center;
+}
+
+table {
+  border-collapse:  collapse;
+  width: 510px;
+  margin: 2% 0;
+}
+
+section {
+  margin: 2% 2%;
+  width: 510px;
+  text-align: center;
+}
+
+button {
+  width: 185px;
+}
+
+  .topic {
+    text-align: center;
+    margin: 2% auto;
+    font-weight: bold;
+    color: #03adad;
+    background-color: #eeede3;
+    font-weight: bold;
+  }
+  
+.sentence {
+  text-align: center;
+  color: #03adad;
+  font-size: 24px;
+}
+
+  .countdown-container {
+    margin: 5rem;
+  }
+  
+  .time-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 3rem auto;
+  }
+  
+  .time {
+    margin: .2rem;
+    background-color: #eeede3;
+    border-radius: .5rem;
+    padding: 1rem;
+    color: #03adad;
+  }
+
+  #hour,#min,#sec {
+    font-size: 3rem;
+    margin-right: 1rem;
+  }
+
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /*
+  .timer-selfsetting {
+    width: 435px;
+    text-align: center;
+    margin: 2% 2%;
+  }
+
+  .function {
+    width: 435px;
+    text-align: center;
+    margin: 2% 2%;
+  }
+  */
+
+  .enddate {
+    margin: 2% 0 0;
+  }
+
+  .pauseNode {
+    margin-bottom: 8px;
+  }
+
+#pau0 {
+  background-color: #e6edff;
+}
+
+#pau1 {
+  background-color: #ffe6e5;
+}

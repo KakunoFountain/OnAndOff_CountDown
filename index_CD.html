@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>On and Off Countdown Timer</title>
+  <link rel="stylesheet" href="css/index_CD.css" />
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> -->
+</head>
+
+<body>
+  <h1 class="topic">断続的なカウントダウンタイマー</h1>
+
+  <main class="countdown-container">
+
+    <h1 class="sentence" id="sentence">実効的な作業時間？？</h1>
+
+    <!-- <canvas id="canvas" width="400" height="100" style="background-color:aquamarine"></canvas> -->
+
+    <article class="time-container" id="time-container">
+      <p class="time"><span id="hour"></span>hrs</p>
+      <p class="time"><span id="min"></span>min</p>
+      <p class="time"><span id="sec"></span>sec</p>
+    </article>
+
+    <div class="flex">
+
+      <section>
+        <h2 class="topic">タイマー手動設定画面</h2>
+
+        <article>
+
+          <table class="enddate">
+            <tr>
+              <th nowrap>　終了日時　</th>
+              <td colspan="3" nowrap>
+                <select name="sel_year" id="sel_year" onchange="DaySelecter();ReSelected();"></select>年
+                <select name="sel_mon" id="sel_mon" onchange="DaySelecter();ReSelected();"></select>月
+                <select name="sel_day" id="sel_day" onchange="ReSelected();"></select>日　
+                <select name="sel_hour" id="sel_hour" onchange="ReSelected();"></select>時
+                <select name="sel_min" id="sel_min" onchange="ReSelected();"></select>分
+              </td>
+            </tr>
+          </table>
+
+        </article>
+        <article>
+      
+          <table>
+            <tbody class="pauseNode" id="pauseNode">
+
+              <tr id="pau0">
+                <th nowrap>一時停止日時</th>
+                <td colspan="3" nowrap>
+                  <select name="pau0_year" id="pau0_year" onchange="DaySelecter(id=pau0id);ReSelected(id=pau0copyid);"></select>年
+                  <select name="pau0_mon" id="pau0_mon" onchange="DaySelecter(id=pau0id);ReSelected(id=pau0copyid);"></select>月
+                  <select name="pau0_day" id="pau0_day" onchange="ReSelected(id=pau0copyid);"></select>日　
+                  <select name="pau0_hour" id="pau0_hour" onchange="ReSelected(id=pau0copyid);"></select>時
+                  <select name="pau0_min" id="pau0_min" onchange="ReSelected(id=pau0copyid);"></select>分
+                </td>
+              </tr>
+        
+              <tr id="pau1">
+                <th nowrap>再開日時</th>
+                <td colspan="3" nowrap>
+                  <select name="pau1_year" id="pau1_year" onchange="DaySelecter(id=pau1id);ReSelected(id=pau1copyid);"></select>年
+                  <select name="pau1_mon" id="pau1_mon" onchange="DaySelecter(id=pau1id);ReSelected(id=pau1copyid);"></select>月
+                  <select name="pau1_day" id="pau1_day" onchange="ReSelected(id=pau1copyid);"></select>日　
+                  <select name="pau1_hour" id="pau1_hour" onchange="ReSelected(id=pau1copyid);"></select>時
+                  <select name="pau1_min" id="pau1_min" onchange="ReSelected(id=pau1copyid);"></select>分
+                </td>
+              </tr>
+          
+            </tbody>
+          </table>
+
+        </article>
+
+        <button type="button" id="add_btn" value="add" onClick="AddMenu();">項目を増やす</button>  
+
+      </section>
+      
+      <section>
+
+        <h2 class="topic">オプション機能</h2>
+
+        <article>
+          <table>
+
+            <tr>
+              <td>
+                <button type="button" id="pip_btn" value="pip" onClick="">ピクチｬインピクチｬ(作成中)</button>
+              </td>
+              <td>
+                <label><input type="checkbox" id="alarm_chk" name="alarm_chk" value="sound" onchange="AlarmOnChange(isend)">タイマー終了時に音を鳴らす</label>
+              </td>
+            </tr>
+    
+            <tr>
+              <td>
+                <button type="button" id="save_btn" value="save" onClick="DLMyTimer()">タイマー設定値を保存</button>
+              </td>
+              <td>
+                <input type="file" id="select-file" accept="text/csv" onchange="selectFile()">
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <button type="button" id="reload" value="reload" onClick="location.reload()">タイマー設定値を初期化</button>
+              </td>
+            </tr>
+    
+          </table>
+        </article>
+
+
+        <h2 class="topic">定期的な稼働間隔から設定</h2>
+        <article>
+
+          <table>
+            <tbody class="pauseNode" id="pauseNode">
+
+              <tr id="regular-startdate">
+                <td colspan="3" nowrap>
+                  開始日時　
+                  <select name="rst_year" id="rst_year" onchange="DaySelecter(id=rstid);"></select>年
+                  <select name="rst_mon" id="rst_mon" onchange="DaySelecter(id=rstid);"></select>月
+                  <select name="rst_day" id="rst_day" onchange=""></select>日　
+                  <select name="rst_hour" id="rst_hour" onchange=""></select>時
+                  <select name="rst_min" id="rst_min" onchange=""></select>分　
+                  から
+                </td>
+              </tr>
+        
+              <tr id="regular-enddate">
+                <td colspan="3" nowrap>
+                  終了日時　
+                  <select name="ren_year" id="ren_year" onchange="DaySelecter(id=renid);"></select>年
+                  <select name="ren_mon" id="ren_mon" onchange="DaySelecter(id=renid);"></select>月
+                  <select name="ren_day" id="ren_day" onchange=""></select>日　
+                  <select name="ren_hour" id="ren_hour" onchange=""></select>時
+                  <select name="ren_min" id="ren_min" onchange=""></select>分　
+                  まで
+                </td>
+              </tr>
+
+              <tr id="regular-part">
+                <td colspan="3" nowrap>
+                  <input type="text" name="runpart" id="runpart" size="1" pattern="^[1-9][0-9]*$" value="0" onfocus="this.value=''" onblur="if(this.value=='')this.value='0'">
+                  分間稼働し
+                  <input type="text" name="pausepart" id="pausepart" size="1" pattern="^[1-9][0-9]*$" value="0" onfocus="this.value=''" onblur="if(this.value=='')this.value='0'">
+                  分間停止する
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <button type="button" id="apply_btn" value="apply" onClick="ApplyRegularSet()">
+                    設定値を適用</button>
+                </td>
+              </tr>
+
+          
+            </tbody>
+          </table>
+
+        </article>
+
+        <!--
+        <h2 class="topic">定期的な停止期間から設定(作成中)</h2>
+        <article>
+        -->
+
+        </article>
+
+      </section> 
+
+    </div>
+
+  </main>
+
+
+  <script src="js/style.js"></script>
+  <script src="js/run.js"></script>
+  <!-- <script src="js/jquery.js"></script> -->
+</body>
+
+</html>

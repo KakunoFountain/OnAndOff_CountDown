@@ -259,9 +259,9 @@ function CountDown(enddate, pause=[["1970/1/1 00:00:00", "1970/1/1 00:00:00"]]) 
 			Pause[i][j] = new Date(pause[i][j]).getTime();  //格納
 		}
 
-		if (Pause[i][0] < now && now < Pause[i][1]) {
+		if (Pause[i][0] < now) {
 
-			Pause[i][0] = now;  //今よりも前のpause期間を換算しない
+			Pause[i][0] = Pause[i][1]  //今よりも前のpause期間を換算しない
 		}
 			
 		pause_range[i] = Pause[i][1] - Pause[i][0];  //格納
@@ -346,6 +346,7 @@ function ReSelected(id=selid, fromsavedata=false) {  //in ApplyRegularSet
 		const end = new Date(enddate).getTime(); // 終わりの日時を取得(ミリ秒)
 
 		for (let i=0; i<pause.length; i++) {
+
 			if (now <= CDm.Pause[i][0] && CDm.Pause[i][0] <= CDm.Pause[i][1] && CDm.Pause[i][1] <= end) ;
 			else if (end < now) {
 				alert("現在日時よりも先を終了日時に設定してください。");
@@ -401,7 +402,7 @@ function ReSelected(id=selid, fromsavedata=false) {  //in ApplyRegularSet
 
 
 //pause期間を削除
-function PauseNodeInitialize() {
+function PauseNodeInitialize() {  //in ApplyRegularSet, ImportMyTimer
 	for (let i=2; i<2*pau0copyid.length; i++) {
 		const pauseNode = document.getElementById("pauseNode");
 		pauseNode.children[2].remove();

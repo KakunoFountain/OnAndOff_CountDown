@@ -260,9 +260,13 @@ function CountDown(enddate, pause=[["1970/1/1 00:00:00", "1970/1/1 00:00:00"]]) 
 		}
 
 		if (Pause[i][0] < now) {
+			Pause[i][0] = now;  //今よりも前のpause期間を換算しない
 
-			Pause[i][0] = Pause[i][1]  //今よりも前のpause期間を換算しない
+			if (Pause[i][1] < now) {
+				Pause[i][1] = now;
+			}
 		}
+		
 			
 		pause_range[i] = Pause[i][1] - Pause[i][0];  //格納
 	}
@@ -274,7 +278,7 @@ function CountDown(enddate, pause=[["1970/1/1 00:00:00", "1970/1/1 00:00:00"]]) 
 
 
 	let diff = end - now - pause_sum;  //断続的な残り時間
-	
+	console.log('pause_sum:', pause_sum)
 
 	// ミリ秒から単位を修正
 	const calcHour = Math.floor(diff / 1000 / 60 / 60);
@@ -291,6 +295,8 @@ function CountDown(enddate, pause=[["1970/1/1 00:00:00", "1970/1/1 00:00:00"]]) 
 	//pause期間の処理
 	for (let i=0; i<Pause.length; i++) {
 		if (Pause[i][0] <= now && now < Pause[i][1]) {
+			console.log('pause期間')
+			//TimerResetter();
 			BgColorChanger();
 			break;
 		}
